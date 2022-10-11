@@ -1,5 +1,5 @@
 # Calculating growth rate
-This is a function that will calculate growth rates between all possible time intervals in R.
+This is a function that will calculate growth rates between all possible time intervals in R (See below for an example).
 
 
 - Start by loading the packages:
