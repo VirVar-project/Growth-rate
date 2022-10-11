@@ -87,7 +87,7 @@ growth_rates_2 <- growth_rate_calculation(df,1,3)
 growth_rate_max <- growth_rates_2 %>% filter(r==max(r))
 ```
 
-- Extract the mean growth rate of the 5 highest maximum values:
+- Calculate the mean growth rate of the 5 highest maximum values:
 ```
 growth_rate_max <- growth_rates_2 %>% 
 	arrange(desc(r)) %>% 
