@@ -79,6 +79,9 @@ growth_rates_1 <- growth_rate_calculation(df)
 growth_rates_2 <- growth_rate_calculation(df,1,3) 
 ```
 - Now you can open `growth_rate_1` or `growth_rate_2` dataset in the RStudio window and click twice on the column named "r" to get growth rates in descending order.
+- 
+
+## Extracting data
 
 - Extract maximum growth rate:
 ```
