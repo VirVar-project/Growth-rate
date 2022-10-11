@@ -21,12 +21,12 @@ growth_rate_calculation <- function(df,t_col=1,N_col=2) { #0
       t_delta = df[f,t_col]-df[i,t_col] #5
       if (t_delta>0){ #6
         growth_rate = ( ln(df[f,N_col]/df[i,N_col]) ) / t_delta #7
-        mylist <- mylist %>% #8
-          add_row(t_i=df[i,t_col],t_f=df[f,t_col],t_d=t_delta, N_i=df[i,N_col],N_f=df[f,N_col],r=growth_rate) #9
+        mylist <- mylist %>%
+          add_row(t_i=df[i,t_col],t_f=df[f,t_col],t_d=t_delta, N_i=df[i,N_col],N_f=df[f,N_col],r=growth_rate) #8
       }
     }
   }
-  return(mylist[-c(1), ]) #10
+  return(mylist[-c(1), ]) #9
 }
 ```
 
