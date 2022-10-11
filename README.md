@@ -2,10 +2,11 @@
 This is a function that will calculate growth rates between all possible time intervals in R.
 
 
-- Start by loading the package:
+- Start by loading the packages:
 
 ```
 library(SciViews)
+library(tidyverse)
 ```
 
 - Now you can activate the function by running the following code:
@@ -68,16 +69,16 @@ df <- data.frame(x=c(1:5), y=c(2,5,7,10,60), z=c(1,2,4,16,256))
 ```
 
 - Applying function
-	- Calculate growth rate using **default** column selection, column nr. 1 for time (x) and column nr. 2 (y) for density.
+	- Calculate growth rates using **default** column selection, where it selects column nr. 1 for time (x) and column nr. 2 (y) for density.
 ```
 growth_rates_1 <- growth_rate_calculation(df) 
 ```
 
-- Calculate growth rate using time from column nr. 1 and densities from column nr. 3:
+- Calculate growth rate by manually selecting the columns. Here we show how we select time from column nr. 1 and densities from column nr. 3:
 ```
 growth_rates_2 <- growth_rate_calculation(df,1,3) 
 ```
-- Now you can open `growth_rate` dataset in R window and click twice on the column named "r" to get growth rates in descending order.
+- Now you can open `growth_rate_1` or `growth_rate_2` dataset in the RStudio window and click twice on the column named "r" to get growth rates in descending order.
 
 - Extract maximum growth rate:
 ```
@@ -86,5 +87,27 @@ growth_rate_max <- growth_rates_2 %>% filter(r==max(r))
 
 - Extract the mean growth rate of the 5 highest maximum values:
 ```
-growth_rate_max <- growth_rates_2 %>% arrange(desc(r)) %>% filter(row_number() %in% c(1:5)) %>% summarise(mean=mean(r))
+growth_rate_max <- growth_rates_2 %>% 
+	arrange(desc(r)) %>% 
+	filter(row_number() %in% c(1:5)) %>% 
+	summarise(mean=mean(r))
+```
+
+- Calculate the mean with standard error.
+- We must first create another function that can calculate standard error
+```
+se <- function(x) sd(x)/sqrt(length(x))
+```
+
+- Now we can use the top 5 growth rates to calculate mean and se
+```
+growth_rate_top5 <- growth_rates_2 %>% 
+  arrange(desc(r)) %>% # Arrange growth rate in descending order (highest values first)
+  filter(row_number() %in% c(1:5)) # Keep the five first rows (5 highest growth rate values)
+
+growth_rate_top5_mean_se <- growth_rate_top5 %>% 
+  summarise(Mean = mean(r), std_error = se(r)) # Calculate mean and standard error of growth rates (r)
+
+
+
 ```
